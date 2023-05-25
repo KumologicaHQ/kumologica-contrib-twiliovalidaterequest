@@ -40,13 +40,13 @@
               <input class="kumo-row-editable" type="text" id="node-input-message" placeholder="Inbound message from Twilio">
             </div>
           </div>
-          <div class="kumo-row" id='TwilioSignature'>
+          <div class="kumo-row" id='Signature'>
             <div class="kumo-row-with-margin" >
               <label class="kumo-row-label" for="node-input-twilioSignature">Signature</label>
               <input class="kumo-row-editable" type="text" id="node-input-twilioSignature" placeholder="Signature send on request header">
             </div>
           </div>
-          <div class="kumo-row" id='BulkToAttr'>
+          <div class="kumo-row" id='twilioauthtoken'>
             <div class="kumo-row-with-margin" >
               <label class="kumo-row-label" for="node-input-twilioauthtoken">Auth Token</label>
               <input class="kumo-row-editable" type="text" id="node-input-twilioauthtoken" placeholder="Twilio Auth token">
@@ -66,18 +66,15 @@
 <script type="text/x-kumologica" data-help-name="TwilioValidateRequest">
   <h4> Description </h4>
   <p>Twilio validate node validates the incoming request from Twilio webhook call. The validation is done against the Twilio signature using the Auth token.
+    Validation ensure that the request is from Twilio platform and not from anywhere else.
   </p>
 
    <h4> Properties </h4>
    <ul>
-   <li><i>Operation</i> - (Required). Option for selecting SMS or Voice message.</li>
-   <li><i>Message</i> - (Optional). Message to be sent as SMS.</li>
-   <li><i>To Number</i> - (Optional). Twilio verified phone number to which message needs to be sent.</li>
-   <li><i>To Numbers</i> - (Optional). Twilio verified phone numbers provided as comma separated values.</li>
-   <li><i>From Number</i> - (Optional). Twilio generated phone number.</li>
-   <li><i>Notify SID</i> - (Optional). SID associated with the Notify service created for sending bulk sms.</li>
-   <li><i>Account SID</i> - (Required). Account number to connect with Twilio cloud platform.</li>
-   <li><i>API Key</i> - (Required). API key to authenticate against the Twilio account.</li>
+   <li><i>Message</i> - (Optional). Inbound message from Twilio webhook call that needs to be validated.</li>
+   <li><i>Signature</i> - (Required). Header that is a signed encoded string send from Twilio on webhook call.</li>
+   <li><i>Auth Token</i> - (Required). Token provided by Twilio for your account in order to validate the signature.</li>
+   <li><i>URL</i> - (Required). Endpoint hosted and shared to Twilio for webhook call.</li>
    </ul>
 
    <h4> Requirements </h4>
@@ -85,13 +82,11 @@
 
    <h4> Throws </h4>
    <ul>
-     <li>TwilioError: Twilio Client Failed</li>
+     <li>TwilioError: Twilio validation check Failed</li>
    </ul>
 
    <h4> Returns </h4>
-   Unique reference sid would be generated as response for each SMS events or Voice call events.
-   The reference sid can be accessed using <code>msg.header.twilio.sid</code> expression. </br>
-   Notification sid can be accessed using <code>msg.header.twilio.nsid</code>.
+   The node returns a header with validation status as true or false. The request is valid if the status is <code>true</code> and is invalid if status is <code>false</code>. The header can be accessed using <code>msg.header.twilioreqstatus</code>.
 
    <h4> More info </h4>
    <a href="http://kumologica.com/">Kumologica Documentation</a>

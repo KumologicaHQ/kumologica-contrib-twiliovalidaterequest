@@ -1,6 +1,6 @@
 {
   "name": "@kumologica/kumologica-contrib-twiliovalidaterequest",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Kumologica node that validates the webhook request from Twilio platform.",
   "author": "kumologica",
   "main": "lib/TwilioValidateRequest.js",
