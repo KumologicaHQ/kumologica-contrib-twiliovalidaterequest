@@ -1,0 +1,30 @@
+{
+  "name": "@kumologica/kumologica-contrib-twiliovalidaterequest",
+  "version": "0.0.1",
+  "description": "Kumologica node that validates the webhook request from Twilio platform.",
+  "author": "kumologica",
+  "main": "lib/TwilioValidateRequest.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KumologicaHQ/kumologica-contrib-twiliovalidaterequest.git"
+  },
+  "license": "Copyright",
+  "keywords": [
+    "kumologica",
+    "platforms",
+    "twilio",
+    "validate"
+  ],
+  "scripts": {
+    "pub": "npm publish --access public"
+  },
+  "dependencies": {
+    "@kumologica/devkit": "latest",
+    "twilio": "^4.11.1"
+  },
+  "kumologica": {
+    "nodes": {
+      "twilio": "lib/TwilioValidateRequest.js"
+    }
+  }
+}

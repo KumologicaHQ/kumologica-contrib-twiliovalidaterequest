@@ -1,0 +1,98 @@
+<script type="text/javascript">
+  App.nodes.registerType('TwilioValidateRequest', {
+    category: 'platforms',
+    color: '#DC143C',
+    defaults: {
+      name: { value: 'TwilioValidateRequest', required: true },
+      message: { value: '', templateable: true },
+      twilioSignature: { value: '', templateable: true, required: true },
+      url: { value: '', templateable: true, required: true },
+      twilioauthtoken: { value: '', templateable: true, required: true }
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: 'kumo_twilio.png',
+    label: function () {
+      return this.name || 'TwilioValidateRequest';
+    },
+  });
+</script>
+
+<script type="text/x-kumologica" data-template-name="TwilioValidateRequest">
+    <div class="kumo-window">
+
+      <!-- Display name -->
+      <div class="kumo-section">
+        <div class="kumo-row">
+            <label class="kumo-row-label" for="node-input-name">Display Name</label>
+            <input class="kumo-row-editable" type="text" id="node-input-name" placeholder="Node Name">
+        </div>
+      </div>
+
+      <!-- General section -->
+      <div class="kumo-section-title">General</div>
+        <div class="kumo-section">
+
+          <div id="AttrHolder">
+          <div class="kumo-row" id='Message'>
+            <div class="kumo-row-with-margin">
+              <label class="kumo-row-label" for="node-input-message">Message</label>
+              <input class="kumo-row-editable" type="text" id="node-input-message" placeholder="Inbound message from Twilio">
+            </div>
+          </div>
+          <div class="kumo-row" id='TwilioSignature'>
+            <div class="kumo-row-with-margin" >
+              <label class="kumo-row-label" for="node-input-twilioSignature">Signature</label>
+              <input class="kumo-row-editable" type="text" id="node-input-twilioSignature" placeholder="Signature send on request header">
+            </div>
+          </div>
+          <div class="kumo-row" id='BulkToAttr'>
+            <div class="kumo-row-with-margin" >
+              <label class="kumo-row-label" for="node-input-twilioauthtoken">Auth Token</label>
+              <input class="kumo-row-editable" type="text" id="node-input-twilioauthtoken" placeholder="Twilio Auth token">
+            </div>
+          </div>
+          <div class="kumo-row" id='url'>
+            <div class="kumo-row-with-margin" >
+              <label class="kumo-row-label" for="node-input-url">URL</label>
+              <input class="kumo-row-editable" type="text" id="node-input-url" placeholder="Webhook URL endpoint configured in Twilio platform">
+            </div>
+          </div>
+          </div>
+      </div>
+
+</script>
+
+<script type="text/x-kumologica" data-help-name="TwilioValidateRequest">
+  <h4> Description </h4>
+  <p>Twilio validate node validates the incoming request from Twilio webhook call. The validation is done against the Twilio signature using the Auth token.
+  </p>
+
+   <h4> Properties </h4>
+   <ul>
+   <li><i>Operation</i> - (Required). Option for selecting SMS or Voice message.</li>
+   <li><i>Message</i> - (Optional). Message to be sent as SMS.</li>
+   <li><i>To Number</i> - (Optional). Twilio verified phone number to which message needs to be sent.</li>
+   <li><i>To Numbers</i> - (Optional). Twilio verified phone numbers provided as comma separated values.</li>
+   <li><i>From Number</i> - (Optional). Twilio generated phone number.</li>
+   <li><i>Notify SID</i> - (Optional). SID associated with the Notify service created for sending bulk sms.</li>
+   <li><i>Account SID</i> - (Required). Account number to connect with Twilio cloud platform.</li>
+   <li><i>API Key</i> - (Required). API key to authenticate against the Twilio account.</li>
+   </ul>
+
+   <h4> Requirements </h4>
+   512Mb is the minimum memory requirement for AWS Lambda deployments.
+
+   <h4> Throws </h4>
+   <ul>
+     <li>TwilioError: Twilio Client Failed</li>
+   </ul>
+
+   <h4> Returns </h4>
+   Unique reference sid would be generated as response for each SMS events or Voice call events.
+   The reference sid can be accessed using <code>msg.header.twilio.sid</code> expression. </br>
+   Notification sid can be accessed using <code>msg.header.twilio.nsid</code>.
+
+   <h4> More info </h4>
+   <a href="http://kumologica.com/">Kumologica Documentation</a>
+</script>
